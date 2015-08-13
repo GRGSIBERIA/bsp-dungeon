@@ -18,7 +18,7 @@ namespace dungeon
     template <class T>
     class Grid : public std::vector<std::vector<T>>
     {
-        void resize(int width, int height)
+        void init(int width, int height)
         {
             this->resize(width);
             for (int i = 0; i < width; ++i)
@@ -28,12 +28,12 @@ namespace dungeon
     public:
         Grid(int width, int height)
         {
-            resize(width, height);
+            init(width, height);
         }
         
         Grid(int width, int height, T fill)
         {
-            resize(width, height);
+            init(width, height);
             for (int i = 0; i < width; ++i)
                 std::fill(this->at(i).begin(), this->at(i).end(), fill);
         }
