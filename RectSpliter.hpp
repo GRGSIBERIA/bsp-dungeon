@@ -69,6 +69,9 @@ namespace dungeon
                 SplitHorizontal();
             }
         }
+        
+        Rect Lhs() const { return lhs; }
+        Rect Rhs() const { return rhs; }
     };
     
     std::random_device RectSpliter::rd;
