@@ -25,6 +25,8 @@ namespace dungeon
         Rect lhs;
         Rect rhs;
         
+        bool enableSplit;
+        
         void SplitVertical()
         {
             lhs.width = rect.width;
@@ -61,13 +63,9 @@ namespace dungeon
             lhs.y = rect.y;
             
             if (isVertical)
-            {
                 SplitVertical();
-            }
             else
-            {
                 SplitHorizontal();
-            }
         }
         
         Rect Lhs() const { return lhs; }
