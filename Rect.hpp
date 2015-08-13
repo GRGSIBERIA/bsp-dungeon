@@ -14,10 +14,12 @@ namespace dungeon
     class Rect
     {
     public:
+        int x;
+        int y;
         int width;
         int height;
         
-        Rect(int w, int h) : width(w), height(h) {}
+        Rect(int x, int y, int w, int h) : x(x), y(y), width(w), height(h) {}
     };
 }
 
