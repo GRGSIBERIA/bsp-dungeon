@@ -27,7 +27,7 @@ namespace dungeon
         
     public:
         GridSplitter(const Grid& baseGrid)
-        : baseGrid(baseGrid)
+        : baseGrid(baseGrid), bsp(baseGrid)
         {
             
         }
