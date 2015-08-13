@@ -20,12 +20,12 @@ namespace dungeon
         
         const Rect& rect;
         const Rect& min;
-        const Rect& max;
         
         Rect lhs;
         Rect rhs;
         
         bool enableSplit;
+        bool isVertical;
         
         void SplitVertical()
         {
@@ -33,7 +33,7 @@ namespace dungeon
             rhs.width = rect.width;
             rhs.x = rect.x;
             
-            int size = std::uniform_int_distribution<int>(min.height, max.height)(rd);
+            int size = std::uniform_int_distribution<int>(min.height, rect.height)(rd);
             lhs.height = size;
             rhs.height = rect.height - size;
             
@@ -46,18 +46,17 @@ namespace dungeon
             rhs.height = rect.height;
             rhs.y = rect.y;
             
-            int size = std::uniform_int_distribution<int>(min.width, max.width)(rd);
+            int size = std::uniform_int_distribution<int>(min.width, rect.width)(rd);
             lhs.width = size;
             rhs.width = rect.width - size;
             
             rhs.x = rect.x + size;
         }
         
-    public:
-        RectSpliter(const Rect& rect, const Rect& min, const Rect& max)
-        : min(min), max(max), rect(rect)
+        void InitializeRects()
         {
-            int isVerticel = std::uniform_int_distribution<int>(0, 1)(rd);
+            if (min.width * 2 > rect.width || min.height * 2 > rect.height)
+                enableSplit = false;
             
             lhs.x = rect.x;
             lhs.y = rect.y;
@@ -68,8 +67,26 @@ namespace dungeon
                 SplitHorizontal();
         }
         
+    public:
+        RectSpliter(const Rect& rect, const Rect& min)
+        : min(min), rect(rect), enableSplit(true)
+        {
+            int isv = std::uniform_int_distribution<int>(0, 1)(rd);
+            isVertical = isv ? true : false;
+            
+            InitializeRects();
+        }
+        
+        RectSpliter(const Rect& rect, const Rect& min, bool prevVertical)
+        : min(min), rect(rect), enableSplit(true), isVertical(!prevVertical)
+        {
+            InitializeRects();
+        }
+        
         Rect Lhs() const { return lhs; }
         Rect Rhs() const { return rhs; }
+        bool EnableSplit() const { return enableSplit; }
+        bool IsVertical() const { return isVertical; }
     };
     
     std::random_device RectSpliter::rd;
