@@ -11,4 +11,19 @@
 
 #include "Grid.hpp"
 
+namespace dungeon
+{
+    /**
+     * @brief Dungeon generator
+     */
+    class DungeonGenerator
+    {
+        Rect size;
+        
+    public:
+        DungeonGenerator(const Rect& dungeonSize)
+        : size(dungeonSize) {}
+    };
+}
+
 #endif
