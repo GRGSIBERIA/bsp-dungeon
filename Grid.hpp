@@ -19,12 +19,17 @@ namespace dungeon
     class Grid
     {
         std::vector<std::vector<T>> rect;
+        int width;
+        int height;
         
         void init(int width, int height)
         {
-            rect->resize(width);
+            this->width = width;
+            this->height = height;
+            
+            rect.resize(width);
             for (int i = 0; i < width; ++i)
-                rect->at(i).resize(height);
+                rect.at(i).resize(height);
         }
         
     public:
@@ -44,14 +49,14 @@ namespace dungeon
         {
             init(width, height);
             for (int i = 0; i < width; ++i)
-                std::fill(rect->at(i).begin(), rect->at(i).end(), fill);
+                std::fill(rect.at(i).begin(), rect.at(i).end(), fill);
         }
         
         /**
          * @brief at [width][height]
          * @return a vertical line
          */
-        std::vector<T>& operator[](int x) { return rect->at(x); }
+        std::vector<T>& operator[](int x) { return rect.at(x); }
         
         void ResizeRow(int size, const T& fill)
         {
