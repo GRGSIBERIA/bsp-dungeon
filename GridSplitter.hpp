@@ -9,6 +9,7 @@
 #ifndef DungeonMaker_GridSplitter_hpp
 #define DungeonMaker_GridSplitter_hpp
 
+#include <memory>
 #include "Grid.hpp"
 
 namespace dungeon
@@ -16,9 +17,9 @@ namespace dungeon
     class GridSplitter
     {
     public:
-        Grid<int> Sprit(const Grid<int>& grid) const
+        static GridPtr Sprit(const Grid& grid) const
         {
-            return Grid<int>(grid.Width(), grid.Height(), 0);
+            return GridPtr(new Grid(grid.Width(), grid.Height(), 0));
         }
     };
 }
