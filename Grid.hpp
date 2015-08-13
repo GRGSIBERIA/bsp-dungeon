@@ -57,6 +57,9 @@ namespace dungeon
          * @return a vertical line
          */
         std::vector<T>& operator[](int x) { return rect.at(x); }
+        
+        int Width() const { return width; }
+        int Height() const { return height; }
     };
 }
 
