@@ -20,6 +20,7 @@ namespace dungeon
         int height;
         
         Rect() : x(0), y(0), width(0), height(0) {}
+        Rect(int w, int h) : width(w), height(h) {}
         Rect(int x, int y, int w, int h) : x(x), y(y), width(w), height(h) {}
     };
 }
