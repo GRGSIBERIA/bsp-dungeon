@@ -13,7 +13,7 @@
 int main(int argc, const char * argv[]) {
     // insert code here...
     
-    dungeon::Rect r(10, 10);
+    dungeon::Rect r(10, 10, 10, 10);
     printf("%d, %d\n", r.width, r.height);
     
     std::random_device rd;
