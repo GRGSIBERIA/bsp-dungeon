@@ -25,7 +25,31 @@ namespace dungeon
         Rect lhs;
         Rect rhs;
         
-        int aSize;
+        void SplitVertical()
+        {
+            lhs.width = rect.width;
+            rhs.width = rect.width;
+            rhs.x = rect.x;
+            
+            int size = std::uniform_int_distribution<int>(min.height, max.height)(rd);
+            lhs.height = size;
+            rhs.height = rect.height - size;
+            
+            rhs.y = rect.y + size;
+        }
+        
+        void SplitHorizontal()
+        {
+            lhs.height = rect.height;
+            rhs.height = rect.height;
+            rhs.y = rect.y;
+            
+            int size = std::uniform_int_distribution<int>(min.width, max.width)(rd);
+            lhs.width = size;
+            rhs.width = rect.width - size;
+            
+            rhs.x = rect.x + size;
+        }
         
     public:
         RectSpliter(const Rect& rect, const Rect& min, const Rect& max)
@@ -38,19 +62,11 @@ namespace dungeon
             
             if (isVertical)
             {
-                lhs.width = rect.width;
-                rhs.width = rect.width;
-                rhs.x = rect.x;
-                
-                rhs.height = std::uniform_int_distribution<int>(min.height, max.height)(rd);
+                SplitVertical();
             }
             else
             {
-                lhs.height = rect.height;
-                rhs.height = rect.height;
-                rhs.y = rect.y;
-                
-                rhs.hegiht = std::uniform_int_distribution<int>(min.width, max.width)(rd);
+                SplitHorizontal();
             }
         }
     };
