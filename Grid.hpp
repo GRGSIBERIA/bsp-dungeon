@@ -57,16 +57,6 @@ namespace dungeon
          * @return a vertical line
          */
         std::vector<T>& operator[](int x) { return rect.at(x); }
-        
-        void ResizeRow(int size, const T& fill)
-        {
-            
-        }
-        
-        void ResizeCol(int size, const T& fill)
-        {
-            
-        }
     };
 }
 
