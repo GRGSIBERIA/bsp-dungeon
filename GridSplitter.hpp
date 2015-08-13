@@ -13,10 +13,13 @@
 
 namespace dungeon
 {
-    class RectSplitter
+    class GridSplitter
     {
     public:
-        
+        Grid<int> Sprit(const Grid<int>& grid) const
+        {
+            return Grid<int>(grid.Width(), grid.Height(), 0);
+        }
     };
 }
 
