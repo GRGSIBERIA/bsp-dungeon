@@ -11,15 +11,25 @@
 
 #include <memory>
 #include "Grid.hpp"
+#include "BSPTree.hpp"
 
 namespace dungeon
 {
     class GridSplitter
     {
-    public:
-        static GridPtr Sprit(const Grid& grid) const
+        const Grid& baseGrid;
+        BSPTree bsp;
+        
+        GridPtr Sprit(const Grid& grid) const
         {
             return GridPtr(new Grid(grid.Width(), grid.Height(), 0));
+        }
+        
+    public:
+        GridSplitter(const Grid& baseGrid)
+        : baseGrid(baseGrid)
+        {
+            
         }
     };
 }
