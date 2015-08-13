@@ -7,19 +7,19 @@
 //
 
 #include <iostream>
-#include "Dungeon.hpp"
+#include <random>
+#include "Rect.hpp"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     
-    dungeon::Grid<int> hoge(10, 10, 10);
+    dungeon::Rect r(10, 10);
+    printf("%d, %d\n", r.width, r.height);
     
-    for (int i = 0; i < 10; ++i)
-    {
-        for (int j = 0; j < 10; j++)
-            printf("%d,", hoge[j][i]);
-        printf("\n");
-    }
+    std::random_device rd;
+    std::uniform_int_distribution<int> uid(0, 10);
+    
+    printf("%d", uid(rd));
     
     return 0;
 }
