@@ -24,10 +24,10 @@ namespace dungeon
         typedef std::shared_ptr<BSPTree> BSPTreePtr;
         
         std::array<BSPTreePtr, 2> leaves;
-        T& object;
+        const T& object;
         
     public:
-        BSPTree(T& obj) object(obj) { }
+        BSPTree(const T& obj) object(obj) { }
         
         T& Object() { return object; }
         
