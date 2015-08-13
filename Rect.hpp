@@ -24,6 +24,11 @@ namespace dungeon
         Rect(int x, int y, int w, int h) : x(x), y(y), width(w), height(h) {}
         Rect(const Rect& rect)
         : x(rect.x), y(rect.y), width(rect.width), height(rect.height) {}
+        
+        Rect Padded(int space) const
+        {
+            return Rect(x - space, y - space, width - space, height - space);
+        }
     };
 }
 
