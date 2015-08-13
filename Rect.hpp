@@ -9,10 +9,15 @@
 #ifndef DungeonMaker_Rect_hpp
 #define DungeonMaker_Rect_hpp
 
+#include <random>
+
 namespace dungeon
 {
     class Rect
     {
+        static std::random_device rd;
+        typedef std::uniform_int_distribution<int> udist;
+        
     public:
         int x;
         int y;
@@ -25,11 +30,17 @@ namespace dungeon
         Rect(const Rect& rect)
         : x(rect.x), y(rect.y), width(rect.width), height(rect.height) {}
         
-        Rect Padded(int space) const
+        Rect Room(int space) const
         {
-            return Rect(x - space, y - space, width - space, height - space);
+            auto padded = Rect(x - space, y - space, width - space, height - space);
+            return Rect(padded.x + udist(0, padded.width >> 1)(rd),
+                        padded.y + udist(0, padded.height >> 1)(rd),
+                        padded.width - udist(0, padded.width >> 1)(rd),
+                        padded.height - udist(0, padded.height >> 1)(rd));
         }
     };
+    
+    std::random_device Rect::rd;
 }
 
 #endif
