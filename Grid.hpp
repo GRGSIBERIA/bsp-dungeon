@@ -32,6 +32,12 @@ namespace dungeon
                 rect.at(i).resize(height);
         }
         
+        void fill(const T& fill)
+        {
+            for (int i = 0; i < width; ++i)
+                std::fill(rect.at(i).begin(), rect.at(i).end(), fill);
+        }
+        
     public:
         /**
          * @brief 2D vector array
@@ -48,8 +54,7 @@ namespace dungeon
         Grid(int width, int height, const T& fill)
         {
             init(width, height);
-            for (int i = 0; i < width; ++i)
-                std::fill(rect.at(i).begin(), rect.at(i).end(), fill);
+            this->fill(fill);
         }
         
         /**
