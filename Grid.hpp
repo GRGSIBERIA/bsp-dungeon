@@ -12,13 +12,13 @@
 #include <array>
 #include <vector>
 #include <algorithm>
+#include <memory>
 
 namespace dungeon
 {
-    template <class T>
     class Grid
     {
-        std::vector<std::vector<T>> rect;
+        std::vector<std::vector<int>> rect;
         int width;
         int height;
         
@@ -32,7 +32,7 @@ namespace dungeon
                 rect.at(i).resize(height);
         }
         
-        void fill(const T& fill)
+        void fill(const int& fill)
         {
             for (int i = 0; i < width; ++i)
                 std::fill(rect.at(i).begin(), rect.at(i).end(), fill);
@@ -51,7 +51,7 @@ namespace dungeon
          * @brief 2D vector array
          * @param[in] fill a filling value
          */
-        Grid(int width, int height, const T& fill)
+        Grid(int width, int height, const int& fill)
         {
             init(width, height);
             this->fill(fill);
@@ -61,11 +61,13 @@ namespace dungeon
          * @brief at [width][height]
          * @return a vertical line
          */
-        std::vector<T>& operator[](int x) { return rect.at(x); }
+        std::vector<int>& operator[](int x) { return rect.at(x); }
         
         int Width() const { return width; }
         int Height() const { return height; }
     };
+    
+    typedef std::shared_ptr<Grid> GridPtr;
 }
 
 #endif
