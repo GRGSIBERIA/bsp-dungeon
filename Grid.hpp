@@ -16,33 +16,52 @@
 namespace dungeon
 {
     template <class T>
-    class Grid : public std::vector<std::vector<T>>
+    class Grid
     {
+        std::vector<std::vector<T>> rect;
+        
         void init(int width, int height)
         {
-            this->resize(width);
+            rect->resize(width);
             for (int i = 0; i < width; ++i)
-                this->at(i).resize(height);
+                rect->at(i).resize(height);
         }
         
     public:
+        /**
+         * @brief 2D vector array
+         */
         Grid(int width, int height)
         {
             init(width, height);
         }
         
-        Grid(int width, int height, T fill)
+        /**
+         * @brief 2D vector array
+         * @param[in] fill a filling value
+         */
+        Grid(int width, int height, const T& fill)
         {
             init(width, height);
             for (int i = 0; i < width; ++i)
-                std::fill(this->at(i).begin(), this->at(i).end(), fill);
+                std::fill(rect->at(i).begin(), rect->at(i).end(), fill);
         }
         
         /**
          * @brief at [width][height]
          * @return a vertical line
          */
-        std::vector<T>& operator[](int x) { return this->at(x); }
+        std::vector<T>& operator[](int x) { return rect->at(x); }
+        
+        void ResizeRow(int size, const T& fill)
+        {
+            
+        }
+        
+        void ResizeCol(int size, const T& fill)
+        {
+            
+        }
     };
 }
 
