@@ -15,8 +15,23 @@ namespace dungeon
 {
     class GridMapper
     {
+        void RecursiveMappingRoom(const BSPTree& tree, Grid& grid)
+        {
+            if (tree.Lhs() == nullptr || tree.Rhs() == nullptr)
+                tree.Rect().Room(2).Draw(grid);
+            else
+            {
+                RecursiveMappingRoom(*tree.Lhs(), grid);
+                RecursiveMappingRoom(*tree.Rhs(), grid);
+            }
+        }
+        
     public:
         
+        void MappingRoom(const BSPTree& topTree, Grid& grid)
+        {
+            RecursiveMappingRoom(topTree, grid);
+        }
     };
 }
 

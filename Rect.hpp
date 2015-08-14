@@ -39,10 +39,10 @@ namespace dungeon
         Rect Room(int space) const
         {
             auto padded = Padded(space);
-            return Rect(padded.x + udist(0, padded.width >> 1)(rd),
-                        padded.y + udist(0, padded.height >> 1)(rd),
-                        padded.width - udist(0, padded.width >> 1)(rd),
-                        padded.height - udist(0, padded.height >> 1)(rd));
+            return Rect(padded.x + udist(0, padded.width * 0.5)(rd),
+                        padded.y + udist(0, padded.height * 0.5)(rd),
+                        padded.width - udist(0, padded.width * 0.5)(rd),
+                        padded.height - udist(0, padded.height * 0.5)(rd));
         }
         
         void Draw(Grid& target)

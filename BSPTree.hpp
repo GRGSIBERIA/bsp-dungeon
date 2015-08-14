@@ -15,10 +15,11 @@
 
 namespace dungeon
 {
+    class BSPTree;
+    typedef std::shared_ptr<BSPTree> BSPTreePtr;
+    
     class BSPTree
     {
-        typedef std::shared_ptr<BSPTree> BSPTreePtr;
-        
         BSPTreePtr lhs;
         BSPTreePtr rhs;
         Rect rect;
@@ -54,6 +55,9 @@ namespace dungeon
         
         bool HasLeaves() const { return hasLeaves; }
         const Rect& Rect() const { return rect; }
+        
+        const BSPTreePtr& Lhs() const { return lhs; }
+        const BSPTreePtr& Rhs() const { return rhs; }
     };
 }
 
