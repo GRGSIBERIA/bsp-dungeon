@@ -16,6 +16,13 @@
 
 namespace dungeon
 {
+    enum class SquaresType
+    {
+        Wall = 0,
+        Room = 1,
+        Passage = 2
+    };
+    
     class Grid
     {
         std::vector<std::vector<int>> rect;
