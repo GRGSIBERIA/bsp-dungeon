@@ -33,7 +33,9 @@ namespace dungeon
         
         Rect Padded(int space) const
         {
-            return Rect(x + space, y + space, width - space, height - space);
+            int w = width - space * 2;
+            int h = height - space * 2;
+            return Rect(x + space, y + space, w, h);
         }
         
         Rect Room(int space) const

@@ -24,7 +24,8 @@ int main(int argc, const char * argv[]) {
     dungeon::BSPTree bsp(rect, min);
     dungeon::GridMapper mapper;
     
-    mapper.MappingRoom(bsp, grid, disableSize);
+    mapper.MappingRoom(bsp, grid);
+    mapper.DrawRoom(grid, disableSize);
     
     FILE *fp = fopen("test.txt", "w");
     for (int h = 0; h < rect.height; ++h)

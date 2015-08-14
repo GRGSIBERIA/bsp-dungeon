@@ -20,6 +20,7 @@ namespace dungeon
     
     class BSPTree
     {
+        BSPTree* parent;
         BSPTreePtr lhs;
         BSPTreePtr rhs;
         Rect rect;
@@ -30,8 +31,8 @@ namespace dungeon
             hasLeaves = split.EnableSplit();
             if (hasLeaves)
             {
-                lhs = BSPTreePtr(new BSPTree(split.Lhs(), min, isVertical));
-                rhs = BSPTreePtr(new BSPTree(split.Rhs(), min, isVertical));
+                lhs = BSPTreePtr(new BSPTree(split.Lhs(), min, isVertical, *this));
+                rhs = BSPTreePtr(new BSPTree(split.Rhs(), min, isVertical, *this));
             }
         }
         
@@ -40,14 +41,14 @@ namespace dungeon
          * @brief initialize constructer
          */
         BSPTree(const Rect& rect, const Rect& min)
-        : rect(rect), lhs(nullptr), rhs(nullptr)
+        : rect(rect), lhs(nullptr), rhs(nullptr), parent(nullptr)
         {
             RectSpliter split(rect, min);
             init(split, min, split.IsVertical());
         }
         
-        BSPTree(const Rect& rect, const Rect& min, bool isVertical)
-        : rect(rect), lhs(nullptr), rhs(nullptr)
+        BSPTree(const Rect& rect, const Rect& min, bool isVertical, BSPTree& parent)
+        : rect(rect), lhs(nullptr), rhs(nullptr), parent(&parent)
         {
             RectSpliter split(rect, min);
             init(split, min, isVertical);
@@ -58,6 +59,7 @@ namespace dungeon
         const Rect& Rect() const { return rect; }
         const BSPTreePtr& Lhs() const { return lhs; }
         const BSPTreePtr& Rhs() const { return rhs; }
+        BSPTree& Parent() { return *parent; }
     };
 }
 
