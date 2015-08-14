@@ -9,28 +9,32 @@
 #ifndef DungeonMaker_GridMapper_hpp
 #define DungeonMaker_GridMapper_hpp
 
+#include <iostream>
+#include <stdio.h>
 #include "BSPTree.hpp"
 
 namespace dungeon
 {
     class GridMapper
     {
-        void RecursiveMappingRoom(const BSPTree& tree, Grid& grid)
+        void RecursiveMappingRoom(const BSPTreePtr& tree, Grid& grid, const Rect& min)
         {
-            if (tree.Lhs() == nullptr || tree.Rhs() == nullptr)
-                tree.Rect().Room(2).Draw(grid);
+            if (tree->Lhs() == nullptr || tree->Rhs() == nullptr)
+            {
+                tree->Rect().Padded(2).Draw(grid, min);
+            }
             else
             {
-                RecursiveMappingRoom(*tree.Lhs(), grid);
-                RecursiveMappingRoom(*tree.Rhs(), grid);
+                RecursiveMappingRoom(tree->Lhs(), grid, min);
+                RecursiveMappingRoom(tree->Rhs(), grid, min);
             }
         }
         
     public:
-        
-        void MappingRoom(const BSPTree& topTree, Grid& grid)
+        void MappingRoom(const BSPTree& topTree, Grid& grid, const Rect& min)
         {
-            RecursiveMappingRoom(topTree, grid);
+            RecursiveMappingRoom(topTree.Lhs(), grid, min);
+            RecursiveMappingRoom(topTree.Rhs(), grid, min);
         }
     };
 }

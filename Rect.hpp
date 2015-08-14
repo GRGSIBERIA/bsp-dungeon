@@ -26,7 +26,7 @@ namespace dungeon
         int height;
         
         Rect() : x(0), y(0), width(0), height(0) {}
-        Rect(int w, int h) : width(w), height(h) {}
+        Rect(int w, int h) : x(0), y(0), width(w), height(h) {}
         Rect(int x, int y, int w, int h) : x(x), y(y), width(w), height(h) {}
         Rect(const Rect& rect)
         : x(rect.x), y(rect.y), width(rect.width), height(rect.height) {}
@@ -45,12 +45,23 @@ namespace dungeon
                         padded.height - udist(0, padded.height * 0.5)(rd));
         }
         
-        void Draw(Grid& target)
+        bool Enable(int w, int h)
         {
-            for (int i = x; i < width; ++i)
+            return w < width && h < height;
+        }
+        
+        void Draw(Grid& target, const Rect& min)
+        {
+            if (!Enable(min.width, min.height))
+                return;
+            
+            for (int i = y; i < y + height; ++i)
             {
-                for (int j = y; j < height; ++j)
+                if (target.Height() <= i) break;
+                
+                for (int j = x; j < x + width; ++j)
                 {
+                    if (target.Width() <= j) break;
                     target[i][j] = (int)SquaresType::Room;
                 }
             }

@@ -35,7 +35,10 @@ namespace dungeon
             
             int size = std::uniform_int_distribution<int>(min.height, rect.height)(rd);
             lhs.height = size;
-            rhs.height = rect.height - size;
+            if (rect.height < size)
+                rhs.height = 0;
+            else
+                rhs.height = rect.height - size;
             
             rhs.y = rect.y + size;
         }
@@ -48,7 +51,10 @@ namespace dungeon
             
             int size = std::uniform_int_distribution<int>(min.width, rect.width)(rd);
             lhs.width = size;
-            rhs.width = rect.width - size;
+            if (rect.width < size)
+                rhs.width = 0;
+            else
+                rhs.width = rect.width - size;
             
             rhs.x = rect.x + size;
         }

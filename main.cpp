@@ -18,25 +18,20 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     
     dungeon::Rect rect(100, 100);
-    dungeon::Rect min(8, 8);
+    dungeon::Rect min(10, 10);
+    dungeon::Rect disableSize(5, 5);
     dungeon::Grid grid(rect.width, rect.height, (int)dungeon::SquaresType::Wall);
     dungeon::BSPTree bsp(rect, min);
     dungeon::GridMapper mapper;
     
-    mapper.MappingRoom(bsp, grid);
+    mapper.MappingRoom(bsp, grid, disableSize);
     
     FILE *fp = fopen("test.txt", "w");
-    if (fp == NULL)
-    {
-        fprintf(stderr, "error");
-        exit(0);
-    }
-    
     for (int h = 0; h < rect.height; ++h)
     {
         for (int w = 0; w < rect.width; ++w)
         {
-            fprintf(fp, "%d", grid[w][h]);
+            fprintf(fp, "%d", (int)grid[h][w]);
         }
         fprintf(fp, "\n");
     }

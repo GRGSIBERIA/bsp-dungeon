@@ -54,8 +54,8 @@ namespace dungeon
         }
         
         bool HasLeaves() const { return hasLeaves; }
-        const Rect& Rect() const { return rect; }
         
+        const Rect& Rect() const { return rect; }
         const BSPTreePtr& Lhs() const { return lhs; }
         const BSPTreePtr& Rhs() const { return rhs; }
     };

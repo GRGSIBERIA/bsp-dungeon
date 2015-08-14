@@ -34,14 +34,14 @@ namespace dungeon
             this->width = width;
             this->height = height;
             
-            rect.resize(width);
-            for (int i = 0; i < width; ++i)
-                rect.at(i).resize(height);
+            rect.resize(height);
+            for (int i = 0; i < height; ++i)
+                rect.at(i).resize(width);
         }
         
         void fill(const int& fill)
         {
-            for (int i = 0; i < width; ++i)
+            for (int i = 0; i < height; ++i)
                 std::fill(rect.at(i).begin(), rect.at(i).end(), fill);
         }
         
