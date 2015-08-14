@@ -10,6 +10,7 @@
 #define DungeonMaker_Rect_hpp
 
 #include <random>
+#include "Grid.hpp"
 
 namespace dungeon
 {
@@ -32,7 +33,7 @@ namespace dungeon
         
         Rect Padded(int space) const
         {
-            return Rect(x - space, y - space, width - space, height - space);
+            return Rect(x + space, y + space, width - space, height - space);
         }
         
         Rect Room(int space) const
@@ -42,6 +43,17 @@ namespace dungeon
                         padded.y + udist(0, padded.height >> 1)(rd),
                         padded.width - udist(0, padded.width >> 1)(rd),
                         padded.height - udist(0, padded.height >> 1)(rd));
+        }
+        
+        void Draw(Grid& target)
+        {
+            for (int i = x; i < width; ++i)
+            {
+                for (int j = y; j < height; ++j)
+                {
+                    target[i][j] = (int)SquaresType::Room;
+                }
+            }
         }
     };
     
