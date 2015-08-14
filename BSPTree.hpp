@@ -23,6 +23,16 @@ namespace dungeon
         Rect rect;
         bool hasLeaves;
         
+        void init(RectSpliter& split, const Rect& min, bool isVertical)
+        {
+            hasLeaves = split.EnableSplit();
+            if (hasLeaves)
+            {
+                lhs = BSPTreePtr(new BSPTree(split.Lhs(), min, isVertical));
+                rhs = BSPTreePtr(new BSPTree(split.Rhs(), min, isVertical));
+            }
+        }
+        
     public:
         /**
          * @brief initialize constructer
@@ -31,12 +41,14 @@ namespace dungeon
         : rect(rect), lhs(nullptr), rhs(nullptr)
         {
             RectSpliter split(rect, min);
-            
-            if (hasLeaves = split.EnableSplit())
-            {
-                lhs = BSPTreePtr(new BSPTree(split.Lhs(), min));
-                rhs = BSPTreePtr(new BSPTree(split.Rhs(), min));
-            }
+            init(split, min, split.IsVertical());
+        }
+        
+        BSPTree(const Rect& rect, const Rect& min, bool isVertical)
+        : rect(rect), lhs(nullptr), rhs(nullptr)
+        {
+            RectSpliter split(rect, min);
+            init(split, min, isVertical);
         }
         
         bool HasLeaves() const { return hasLeaves; }
