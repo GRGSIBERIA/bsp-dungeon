@@ -44,7 +44,7 @@ namespace dungeon
         {
             for (const auto& rect : rects)
             {
-                auto padded = rect->Padded(2);
+                auto padded = rect->Room(2);
                 padded.Draw(grid, min);
             }
         }

@@ -40,21 +40,26 @@ namespace dungeon
         
         Rect Room(int space) const
         {
+            /*
             auto padded = Padded(space);
-            return Rect(padded.x + udist(0, padded.width * 0.5)(rd),
-                        padded.y + udist(0, padded.height * 0.5)(rd),
-                        padded.width - udist(0, padded.width * 0.5)(rd),
-                        padded.height - udist(0, padded.height * 0.5)(rd));
+            return Rect(padded.x + udist(0, space * 2)(rd),
+                        padded.y + udist(0, space * 2)(rd),
+                        padded.width - udist(0, space * 2)(rd),
+                        padded.height - udist(0, space * 2)(rd));
+             */
+            return Padded(space).Padded(udist(0, space * 2)(rd));
         }
         
-        bool Enable(int w, int h)
+        bool Enable(const Rect& min)
         {
-            return (w < width && h < height) || (width * 2 < height) || (height * 2 < width);
+            return
+            (min.width < width && min.height < height);
+                //&& (width * 2 > height) && (height * 2 > width);
         }
         
         void Draw(Grid& target, const Rect& min)
         {
-            if (!Enable(min.width, min.height))
+            if (!Enable(min))
                 return;
             
             for (int i = y; i < y + height; ++i)
