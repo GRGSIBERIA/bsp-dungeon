@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "RectSpliter.hpp"
+#include "Grid.hpp"
 
 namespace dungeon
 {
@@ -52,6 +53,7 @@ namespace dungeon
         }
         
         bool HasLeaves() const { return hasLeaves; }
+        const Rect& Rect() const { return rect; }
     };
 }
 
