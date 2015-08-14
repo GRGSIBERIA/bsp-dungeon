@@ -10,36 +10,36 @@
 #define DungeonMaker_BSPTree_hpp
 
 #include <memory>
-#include "Rect.hpp"
+#include "RectSpliter.hpp"
 
 namespace dungeon
 {
     class BSPTree
     {
-        typedef std::shared_ptr<BSPTree> BSPTreePTr;
+        typedef std::shared_ptr<BSPTree> BSPTreePtr;
         
         BSPTreePtr lhs;
-        BSPTreePTr rhs;
+        BSPTreePtr rhs;
         Rect rect;
+        bool hasLeaves;
         
     public:
         /**
-         * @brief recursive constructer
-         */
-        BSPTree(const BSPTree& parent, const Rect&min, const Rect& max)
-        : rect(parent.rect)
-        {
-            
-        }
-        
-        /**
          * @brief initialize constructer
          */
-        BSPTree(const Rect& rect, const Rect& min, const Rect& max)
-        : rect(rect)
+        BSPTree(const Rect& rect, const Rect& min)
+        : rect(rect), lhs(nullptr), rhs(nullptr)
         {
+            RectSpliter split(rect, min);
             
+            if (hasLeaves = split.EnableSplit())
+            {
+                lhs = BSPTreePtr(new BSPTree(split.Lhs(), min));
+                rhs = BSPTreePtr(new BSPTree(split.Rhs(), min));
+            }
         }
+        
+        bool HasLeaves() const { return hasLeaves; }
     };
 }
 
