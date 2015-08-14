@@ -27,12 +27,17 @@ int main(int argc, const char * argv[]) {
     mapper.MappingRoom(bsp, grid);
     mapper.DrawRoom(grid, disableSize);
     
+    const char* kabe = "壁";
+    const char* heya = "へ";
     FILE *fp = fopen("test.txt", "w");
     for (int h = 0; h < rect.height; ++h)
     {
         for (int w = 0; w < rect.width; ++w)
         {
-            fprintf(fp, "%d", (int)grid[h][w]);
+            if (grid[h][w] == (int)dungeon::SquaresType::Wall)
+                fprintf(fp, kabe);
+            else
+                fprintf(fp, heya);
         }
         fprintf(fp, "\n");
     }

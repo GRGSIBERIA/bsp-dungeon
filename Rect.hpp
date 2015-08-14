@@ -49,7 +49,7 @@ namespace dungeon
         
         bool Enable(int w, int h)
         {
-            return w < width && h < height;
+            return (w < width && h < height) || (width * 2 < height) || (height * 2 < width);
         }
         
         void Draw(Grid& target, const Rect& min)
